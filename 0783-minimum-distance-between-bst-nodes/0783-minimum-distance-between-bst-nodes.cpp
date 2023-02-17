@@ -12,27 +12,29 @@
 class Solution {
 public:
     
-    vector<int> v;
+    int prev;
+    int ans;
     void dfs(TreeNode* root){
+        
         if(root==NULL)
             return;
         
         dfs(root->left);
+        
+        if(prev != -1)
+            ans = min(ans , (root->val - prev));
+        
+        prev=root->val;
+ 
         dfs(root->right);
-        
-        v.push_back(root->val);
-        
     }
     
     int minDiffInBST(TreeNode* root) {
         
-        dfs(root);
-        sort(begin(v) , end(v));
+        ans=INT_MAX;
+        prev=-1;
         
-        int mn=INT_MAX;
-        for(int i=0; i<v.size()-1; i++){
-            mn=min(mn, abs(v[i]-v[i+1]));
-        }
-        return mn;
+        dfs(root);
+        return ans;
     }
 };
