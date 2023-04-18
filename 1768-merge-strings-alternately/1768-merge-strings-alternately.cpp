@@ -6,23 +6,13 @@ public:
         int m=w2.size();
         
         string ans;
-        int flag=1;
         
-        while(i<n and j<m){
-            if(flag){
-                ans+=w1[i];
-                flag=0;
-                i++;
-            }
-            else{
-                ans+=w2[j];
-                flag=1;
-                j++;
-            }
+        while(i<n || j<m){
+            if(i<n) ans += w1[i++];
+            if(j<m) ans += w2[j++];
         }
         
-        while(i<n) ans += w1[i++];
-        while(j<m) ans += w2[j++];
+        
         return ans;
     }
 };
